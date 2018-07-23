@@ -1,0 +1,11 @@
+package poc.jedi.bke.repository;
+
+import poc.jedi.bke.domain.Authority;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+/**
+ * Spring Data JPA repository for the Authority entity.
+ */
+public interface AuthorityRepository extends JpaRepository<Authority, String> {
+}

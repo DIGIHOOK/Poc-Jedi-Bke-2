@@ -1,0 +1,25 @@
+version: '2'
+services:
+    pocjedibke2-app:
+        image: pocjedibke2
+        environment:
+            # - _JAVA_OPTIONS=-Xmx512m -Xms256m
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://pocjedibke2-mysql:3306/pocjedibke2?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - SECURITY_OAUTH2_CLIENT_CLIENT_ID=internal
+            - SECURITY_OAUTH2_CLIENT_CLIENT_SECRET=internal
+            - SECURITY_OAUTH2_RESOURCE_USER_INFO_URI=http://keycloak:9080/auth/realms/jhipster/protocol/openid-connect/userinfo
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=pocjedibke2-elasticsearch:9300
+    pocjedibke2-mysql:
+        extends:
+            file: mysql.yml
+            service: pocjedibke2-mysql
+    pocjedibke2-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: pocjedibke2-elasticsearch
+    keycloak:
+        extends:
+            file: keycloak.yml
+            service: keycloak
